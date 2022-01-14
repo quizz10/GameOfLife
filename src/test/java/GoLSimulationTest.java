@@ -13,7 +13,15 @@ class GoLSimulationTest {
     @Test
     void tenByTenBoardExists() {
         int checkZeroOnGivenPosition = 0;
-        int givenPosition = simulation.gameOfLifeBoard[9][9];
+        int givenPosition = simulation.getBoard(9,9);
         assertEquals(checkZeroOnGivenPosition, givenPosition);
+    }
+
+    @Test
+    void givenCellGetsValueOne() {
+        simulation.setAlive(3,3);
+        int findOneOnGivenPosition = 1;
+        int givenPosition = simulation.getBoard(3,3);
+        assertEquals(findOneOnGivenPosition, givenPosition);
     }
 }
