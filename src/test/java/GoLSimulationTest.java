@@ -26,4 +26,21 @@ class GoLSimulationTest {
         assertEquals(0, simulation.getState(-1,-1));
         assertEquals(0, simulation.getState(100,100));
     }
+
+    @Test
+    void countAliveNeighboursWithNoLivingCellAlwaysReturnsZero() {
+        assertEquals(0, simulation.countAliveNeighbours(1, 9));
+        assertEquals(0, simulation.countAliveNeighbours(3, 6));
+        assertEquals(0, simulation.countAliveNeighbours(5, 5));
+    }
+
+    @Test
+    void findingOneAliveNeighbourReturnsOneFindingTwoReturnsTwo() {
+        simulation.setAlive(3,0);
+        simulation.setAlive(3,1);
+        simulation.setAlive(3,2);
+
+        assertEquals(1, simulation.countAliveNeighbours(3,0));
+        assertEquals(2, simulation.countAliveNeighbours(3,1));
+    }
 }

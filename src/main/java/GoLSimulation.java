@@ -22,4 +22,20 @@ public class GoLSimulation {
         return gameOfLifeBoard[x][y];
     }
 
+    public int countAliveNeighbours(int x, int y) {
+        int count = 0;
+        count += getState(x - 1, y - 1);
+        count += getState(x, y - 1);
+        count += getState(x + 1, y - 1);
+
+        count += getState(x - 1, y);
+        count += getState(x + 1, y);
+
+        count += getState(x -1, y + 1);
+        count += getState(x, y + 1);
+        count += getState(x + 1, y + 1);
+
+        return count;
+    }
+
 }
