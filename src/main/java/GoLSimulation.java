@@ -13,7 +13,13 @@ public class GoLSimulation {
         gameOfLifeBoard[x][y] = 1;
     }
 
-    public int getBoard(int x, int y) {
+    public int getState(int x, int y) {
+        if (x < 0 || x >= width)
+            return 0;
+        if (y < 0 || y >= height)
+            return 0;
+
         return gameOfLifeBoard[x][y];
     }
+
 }

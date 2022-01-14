@@ -12,16 +12,18 @@ class GoLSimulationTest {
 
     @Test
     void tenByTenBoardExists() {
-        int checkZeroOnGivenPosition = 0;
-        int givenPosition = simulation.getBoard(9,9);
-        assertEquals(checkZeroOnGivenPosition, givenPosition);
+        assertEquals(0, simulation.getState(9,9));
     }
 
     @Test
     void givenCellGetsValueOne() {
         simulation.setAlive(3,3);
-        int findOneOnGivenPosition = 1;
-        int givenPosition = simulation.getBoard(3,3);
-        assertEquals(findOneOnGivenPosition, givenPosition);
+        assertEquals(1, simulation.getState(3,3));
+    }
+
+    @Test
+    void getStateOutOfBoundsReturnsZero() {
+        assertEquals(0, simulation.getState(-1,-1));
+        assertEquals(0, simulation.getState(100,100));
     }
 }
