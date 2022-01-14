@@ -38,4 +38,26 @@ public class GoLSimulation {
         return count;
     }
 
+    public void simulateNextGeneration() {
+        int[][] tempBoard = new int[width][height];
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                int aliveNeighbours = countAliveNeighbours(x, y);
+                if (gameOfLifeBoard[x][y] == 1) {
+                    if (aliveNeighbours < 2) {
+                        tempBoard[x][y] = 0;
+                    } else if (aliveNeighbours == 2 || aliveNeighbours == 3) {
+                        tempBoard[x][y] = 1;
+                    } else if (aliveNeighbours > 3) {
+                        tempBoard[x][y] = 0;
+                    }
+                } else {
+                    if (aliveNeighbours == 3) {
+                        tempBoard[x][y] = 1;
+                    }
+                }
+            }
+        }
+        gameOfLifeBoard = tempBoard;
+    }
 }
