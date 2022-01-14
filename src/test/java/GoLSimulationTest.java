@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -44,27 +46,34 @@ class GoLSimulationTest {
         assertEquals(2, simulation.countAliveNeighbours(3,1));
     }
 
-    @Test
-    void simulateNextGenerationWithNoAliveNeighboursReturnsZero() {
-        simulation.setAlive(3,3);
-        simulation.setAlive(6,6);
-        simulation.setAlive(9,9);
+    @ParameterizedTest
+    @CsvSource({
+            "0,0, 0,2, 0,4, 0",
+            "2,0, 2,2, 2,4, 0",
+            "4,0, 4,2, 8,4, 0",
+    })
+    void simulateNextGenerationWithNoAliveNeighboursReturnsZero(int x1,int y1, int x2,int y2, int x3,int y3, int expected) {
+        simulation.setAlive(x1,y1);
+        simulation.setAlive(x2,y2);
+        simulation.setAlive(x3,y3);
         simulation.simulateNextGeneration();
 
-        assertEquals(0, simulation.getState(3,3));
-        assertEquals(0, simulation.getState(6,6));
-        assertEquals(0, simulation.getState(9,9));
+        assertEquals(expected, simulation.getState(x1,y1));
+
     }
 
-    @Test
-    void simulateNextGenerationWithTwoAliveNeighboursReturnsOne() {
-        simulation.setAlive(3,3);
-        simulation.setAlive(3,4);
-        simulation.setAlive(3,5);
-        simulation.simulateNextGeneration();
+    @ParameterizedTest
+    @CsvSource({
+            "3,3, 3,4, 3,5, 1",
+            "1,1, 1,2, 1,3, 1",
+            "6,6, 5,6, 4,6, 1"
+    })
+    void simulateNextGenerationWithTwoNeighboursReturnsOne(int x1,int y1, int x2,int y2, int x3,int y3, int expected) {
 
-        assertEquals(0, simulation.getState(3,3));
-        assertEquals(1, simulation.getState(3,4));
-        assertEquals(0, simulation.getState(3,5));
+        simulation.setAlive(x1,y1);
+        simulation.setAlive(x2,y2);
+        simulation.setAlive(x3,y3);
+
+        assertEquals(expected, simulation.getState(x2,y2));
     }
 }
