@@ -118,4 +118,14 @@ class GoLSimulationTest {
 
         assertEquals(expected, simulation.getState(x2,y2));
     }
+
+    @Test
+    void giveBirthToDeadCellWithThreeAliveNeighbours() {
+        simulation.setAlive(3,0);
+        simulation.setAlive(3,2);
+        simulation.setAlive(2,2);
+        simulation.simulateNextGeneration();
+
+        assertEquals(1, simulation.getState(3,1));
+    }
 }
