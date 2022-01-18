@@ -120,7 +120,7 @@ class GoLSimulationTest {
     }
 
     @Test
-    void giveBirthToDeadCellWithThreeAliveNeighbours() {
+    void deadCellWithThreeAliveNeighboursReturnsOne() {
         simulation.setAlive(3,0);
         simulation.setAlive(3,2);
         simulation.setAlive(2,2);
@@ -140,12 +140,27 @@ class GoLSimulationTest {
             // Bottom left
             "0,8, 1,8, 1,9, 0,9, 1"
     })
-    void giveBirthToDeadCellWithThreeAliveNeighboursInAllCorners(int x1,int y1, int x2,int y2, int x3,int y3, int aliveCellX, int aliveCellY, int expected) {
+    void deadCellWithThreeAliveNeighboursReturnsOneInAllCorners(int x1,int y1, int x2,int y2, int x3,int y3, int aliveCellX, int aliveCellY, int expected) {
         simulation.setAlive(x1,y1);
         simulation.setAlive(x2,y2);
         simulation.setAlive(x3,y3);
         simulation.simulateNextGeneration();
 
         assertEquals(expected, simulation.getState(aliveCellX, aliveCellY));
+    }
+
+    @Test
+    void aliveCellWithThreeNeighboursDies() {
+
+        simulation.setAlive(0,1);
+        simulation.setAlive(0,2);
+        simulation.setAlive(0,3);
+        simulation.setAlive(1,2);
+        simulation.setAlive(2,2);
+
+        simulation.simulateNextGeneration();
+
+        assertEquals(0, simulation.getState(1,2));
+        assertEquals(0, simulation.getState(2,2));
     }
 }

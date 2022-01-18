@@ -48,7 +48,7 @@ public class GoLSimulation {
                         tempBoard[x][y] = 0;
                     } else if (aliveNeighbours == 2 || aliveNeighbours == 3) {
                         tempBoard[x][y] = 1;
-                    } else if (aliveNeighbours > 3) {
+                    } else {
                         tempBoard[x][y] = 0;
                     }
                 } else {
@@ -59,5 +59,23 @@ public class GoLSimulation {
             }
         }
         gameOfLifeBoard = tempBoard;
+    }
+
+    public void showBoard() {
+        for (int y = 0; y < height; y++) {
+            StringBuilder line = new StringBuilder("|");
+            for (int x = 0; x < width; x++) {
+                if (this.gameOfLifeBoard[x][y] == 1) {
+                    line.append("+");
+                } else {
+                    line.append(" ");
+                }
+            }
+            line.append("|");
+            System.out.println(line);
+        }
+
+        System.out.println("\n");
+
     }
 }
