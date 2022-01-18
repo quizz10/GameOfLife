@@ -76,4 +76,25 @@ class GoLSimulationTest {
 
         assertEquals(expected, simulation.getState(x2,y2));
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            // Top left
+            "0,0, 1,0, 1,1, 1",
+            // Top right
+            "9,0, 8,0, 7,0, 1",
+            // Bottom left
+            "0,9, 1,9, 2,9, 1",
+            // Bottom right
+            "9,9, 8,9, 7,9, 1"
+    })
+    void nextGenerationCornerTestWithTwoNeighboursReturnsOne(int x1,int y1, int x2,int y2, int x3,int y3, int expected) {
+
+        simulation.setAlive(x1,y1);
+        simulation.setAlive(x2,y2);
+        simulation.setAlive(x3,y3);
+        simulation.simulateNextGeneration();
+
+        assertEquals(expected, simulation.getState(x2,y2));
+    }
 }

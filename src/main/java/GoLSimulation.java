@@ -31,7 +31,7 @@ public class GoLSimulation {
         count += getState(x - 1, y);
         count += getState(x + 1, y);
 
-        count += getState(x -1, y + 1);
+        count += getState(x - 1, y + 1);
         count += getState(x, y + 1);
         count += getState(x + 1, y + 1);
 
